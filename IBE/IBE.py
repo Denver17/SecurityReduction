@@ -7,7 +7,7 @@ def Setup():
     g = Element.random(pairing, G1)                     # 选取随机元素g作为生成元
     g_x = Element(pairing, G1, value = g ** x)          # 计算公共参数g ^ x
     # 现在我们得到系统公钥pk = <g, g ^ x>
-    return x, g
+    return x, g, g_x
 
 def KeyGen(id, x):
     # 将用户id哈希为G1上的元素
@@ -16,14 +16,13 @@ def KeyGen(id, x):
     sk = Element(pairing, G1, value = Qid ** x)
     return sk
 
-def Encrypt(id, M, g, x):
+def Encrypt(id, M, g, g_x):
     # 将用户id映射为G1上的元素
     Qid = Element.from_hash(pairing, G1, id)
     # 在Zr中选取随机数r, 计算密文组件C1 = g ^ r
     r = Element.random(pairing, Zr)
     C1 = Element(pairing, G1, value = g ** r)
     # 计算g_id = e(Qid, g ^ x) ^ r
-    g_x = Element(pairing, G1, value = g ** x)
     egg_Qid_gx = pairing.apply(Qid, g_x)
     g_id = Element(pairing, GT, value = egg_Qid_gx ** r)
     
@@ -60,10 +59,10 @@ if __name__ == "__main__":
     params = Parameters(n = q1 * q2)
     pairing = Pairing(params)
     
-    x, g = Setup()
+    x, g, g_x = Setup()
     # 目标id为Bob
     sk = KeyGen(idAlice, x)
-    C1, C2 = Encrypt(idAlice, message, g, x)
+    C1, C2 = Encrypt(idAlice, message, g, g_x)
     M = Decrypt(sk, C1, C2)
 
     print(M)

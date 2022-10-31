@@ -18,7 +18,7 @@ $$d_{ID|k-1} = (g_2^\alpha * (h_1^{I_1} \cdots h_{k-1}^{I_{k-1}}*g_3) ^ {r^{'}},
 
 &emsp;&emsp;我们随机选取$r = r ^ {'} + t \in Z_p$,构造$d_{ID}$:
 
-$$d_{ID} = (a_0 * b_k^{I_k}*(h_1^{I_1} \cdots h_k^{I_k} * g_3) ^ t, a_1 * g_t, b_{k+1}*h_{k+1}^t, \ldots, b_l * h_l^t)$$
+$$d_{ID} = (a_0 * b_k^{I_k}*(h_1^{I_1} \cdots h_k^{I_k} * g_3) ^ t, a_1 * g ^ t, b_{k+1}*h_{k+1}^t, \ldots, b_l * h_l^t)$$
 
 &emsp;&emsp;这样就能构造出$d_{ID}$。
 

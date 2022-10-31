@@ -84,7 +84,7 @@ def Decrypt(pairing, d, ct, sk, I):
     for val in I:                   # 计算Pi = e(Ei, Di) ^ ci(0), ci(0)是拉格朗日因子
         Ei = ct[1][val]
         Di = sk[val]
-        ci = lagrange(I, val)       # 这里是i, 还是I[i], 应注意
+        ci = lagrange(I, val)
         egg = pairing.apply(Ei, Di)
         P = Element(pairing, GT, value = egg ** ci)
         Plist.append(P)
@@ -128,7 +128,7 @@ if __name__ == "__main__":
     # UsrId = ["0", "1"]
     # TextId = ["0", "2"]
     UsrId = ["Alice", "Female", "20", "18866661302", "Alice@qq.com"]
-    TextId = ["Bob", "Male", "31", "18866661302", "Alice@qq.com"]
+    TextId = ["Bob", "Male", "20", "18866661302", "Alice@qq.com"]
     # S表示用户属性集合, W表示明文属性集合
     U, S, W = getSet(UsrId, TextId)
     print("S: {} \nW: {}".format(S, W))
