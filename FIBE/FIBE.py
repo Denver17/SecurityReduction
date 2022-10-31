@@ -121,14 +121,14 @@ if __name__ == "__main__":
 
     q1 = get_random_prime(60)
     q2 = get_random_prime(60)
-    params = Parameters(n = q1 * q2)
+    params = Parameters(n = q1)
 
     # UsrId = ["0"]
     # TextId = ["0"]
     # UsrId = ["0", "1"]
     # TextId = ["0", "2"]
     UsrId = ["Alice", "Female", "20", "18866661302", "Alice@qq.com"]
-    TextId = ["Bob", "Male", "20", "18866661302", "Alice@qq.com"]
+    TextId = ["Bob", "Male", "21", "18866661302", "Alice@qq.com"]
     # S表示用户属性集合, W表示明文属性集合
     U, S, W = getSet(UsrId, TextId)
     print("S: {} \nW: {}".format(S, W))

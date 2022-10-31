@@ -35,7 +35,3 @@ if(egg_ab_p.__eq__(egg_ab)):        # 验证e(g ^ a, g ^ b)与e(g, g) ^ (a * b)�
     print("yes")
 else:
     print("no")
-
-g = Element.zero(pairing, G1)
-eg = pairing.apply(g, g)
-print(eg)
