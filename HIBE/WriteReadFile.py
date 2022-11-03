@@ -53,6 +53,16 @@ def WritePT(pairing, usrName, content):
         f.write(str(content))
 
 
+# 将ID写入文件中, Zr群元素不能直接转为string写入文件, 需要先转为int
+def WriteID(pairing, usrName, ID):
+    fileName = path + usrName + "-ID.txt"
+    res = ""
+    for i in range(0, len(ID)):
+        res += str(int(ID[i])) + "\n"
+    with open(fileName, "w") as f:
+        f.write(res)
+
+
 # 读取主密钥, 主密钥是G1群元素, 直接读取
 def ReadMsk(pairing):
     fileName = path + "Msk.txt"
@@ -105,3 +115,12 @@ def ReadPT(pairing, usrName):
     res = Element(pairing, GT, content)
     return res
 
+
+# 读取ID, ID是一个列表, 其中每个元素是Zr群元素
+def ReadID(pairing, usrName):
+    fileName = path + usrName + "-ID.txt"
+    content = []
+    for line in open(fileName):
+        line = line[:-1]
+        content.append(Element(pairing, Zr, int(line)))
+    return content
