@@ -64,7 +64,7 @@ def KeyGen(pairing, msk, pk, S, d, g):
         res = Element(pairing, Zr, fval[val] / msk[val])
         sk[val] = Element(pairing, G1, g ** res)
     
-    return sk, coef
+    return sk
 
 def Encrypt(pairing, message, pk, W):
     # 选取随机数s, 计算E' = M * Y ^ s
@@ -136,7 +136,7 @@ if __name__ == "__main__":
     d = 3       # d表示系统门限值
 
     pairing, msk, pk, g = Setup(params, U)          # U表示全部属性集合
-    sk, coef = KeyGen(pairing, msk, pk, S, d, g)
+    sk = KeyGen(pairing, msk, pk, S, d, g)
 
     tmpg = Element.random(pairing, G1)
     message = pairing.apply(tmpg, tmpg)
@@ -146,12 +146,10 @@ if __name__ == "__main__":
 
     I = getSameSet(S, W)         # 获取交集
     print("I:", I)
-    #if len(I) >= d:
+    
     M = Decrypt(pairing, d, ct, sk, I)
     print("decrypted ciphertext:", M)
     if(M.__eq__(message)):
         print("yes")
     else:
         print("no")
-    # else:
-    #     print("unable to decrypt")
